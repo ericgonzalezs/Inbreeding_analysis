@@ -1,5 +1,6 @@
-#Starting with fastq files with names  like this ones TUM1_S1_L005_R1_001.fastq.gz  TUM1_S1_L005_R2_001.fastq.gz
-#Trimming with trimmomatic
+# Starting with fastq files with names  like this ones TUM1_S1_L005_R1_001.fastq.gz  TUM1_S1_L005_R2_001.fastq.gz
+
+# Trimming with trimmomatic
 for i in $(ls *R1_001.fastq.gz); do name=$(echo $i | cut -d "_" -f 1,2,3); java -jar trimmomatic-0.38.jar PE -threads 10 -phred33 -trimlog "$name"".log"  "$name""_R1_001.fastq.gz"  "$name""_R2_001.fastq.gz" "$name""_paired_R1_001.fastq.gz" "$name""_unpaired_R1_001.fastq.gz" "$name""_paired_R2_001.fastq.gz" "$name""_unpaired_R2_001.fastq.gz" ILLUMINACLIP:TruSeq2-PE_index.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36; done
 
 #	Alignment BWA mem for Pair End (PE)
